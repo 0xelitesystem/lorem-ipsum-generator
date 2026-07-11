@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lorem Ipsum Generator</title>
+<meta name="description" content="Generate lorem ipsum placeholder text locally in your browser. Pick paragraphs, sentences, or words, with an option to start with the classic Lorem ipsum opener. Live and copyable.">
+<link rel="canonical" href="https://0xelitesystem.github.io/lorem-ipsum-generator/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Lorem Ipsum Generator">
+<meta property="og:description" content="Generate lorem ipsum placeholder text by paragraphs, sentences, or words. Live, local, copyable.">
+<meta property="og:url" content="https://0xelitesystem.github.io/lorem-ipsum-generator/">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Lorem Ipsum Generator",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Any (browser)",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "url": "https://0xelitesystem.github.io/lorem-ipsum-generator/",
+  "author": { "@type": "Person", "name": "0xelitesystem", "url": "https://elitesystem.ai" }
+}
+</script>
+<style>
+:root {
+  --bg: #fafaf6;
+  --surface: #ffffff;
+  --ink: #0a1d1e;
+  --ink-soft: #2c4a4c;
+  --rule: #c8d4d3;
+  --teal: #0f5c60;
+  --teal-deep: #0a4548;
+  --gold: #b07d2a;
+  --gold-deep: #8a611f;
+  --err: #8b1a1a;
+  --code-bg: #f0ebe1;
+}
+[data-theme="dark"] {
+  --bg: #0c1c1d;
+  --surface: #14292a;
+  --ink: #e8ebe6;
+  --ink-soft: #b0c0bd;
+  --rule: #2a4042;
+  --teal: #4ab4ba;
+  --teal-deep: #6dc8ce;
+  --gold: #d4a155;
+  --gold-deep: #e6b876;
+  --err: #e88080;
+  --code-bg: #0a1718;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  min-height: 100vh;
+  padding: 2rem 1rem;
+  line-height: 1.55;
+}
+.wrap { max-width: 900px; margin: 0 auto; }
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  border-bottom: 2px solid var(--teal);
+  padding-bottom: 1rem;
+  margin-bottom: 2rem;
+}
+h1 { font-size: 1.75rem; font-weight: 600; letter-spacing: -0.01em; color: var(--teal); }
+.tag {
+  font-family: ui-monospace, SFMono-Regular, monospace;
+  font-size: 0.75rem;
+  color: var(--gold-deep);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+[data-theme="dark"] .tag { color: var(--gold); }
+.theme-btn {
+  background: transparent;
+  border: 1px solid var(--rule);
+  color: var(--ink-soft);
+  padding: 0.4rem 0.85rem;
+  font-size: 0.8rem;
+  font-family: inherit;
+  cursor: pointer;
+  border-radius: 2px;
+}
+.theme-btn:hover { border-color: var(--teal); color: var(--teal); }
+.lede { font-size: 0.95rem; color: var(--ink-soft); margin-bottom: 1.75rem; max-width: 62ch; }
+.input-box {
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  padding: 1.25rem;
+  margin-bottom: 1.75rem;
+  border-radius: 3px;
+}
+label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ink-soft);
+  display: block;
+  margin-bottom: 0.5rem;
+}
+.controls { display: flex; gap: 1.25rem; align-items: flex-end; flex-wrap: wrap; }
+input[type="number"] {
+  background: var(--code-bg);
+  border: 1px solid var(--rule);
+  color: var(--ink);
+  padding: 0.55rem 0.65rem;
+  font-family: ui-monospace, SFMono-Regular, monospace;
+  font-size: 0.85rem;
+  border-radius: 2px;
+  width: 110px;
+}
+select {
+  background: var(--code-bg);
+  border: 1px solid var(--rule);
+  color: var(--ink);
+  padding: 0.55rem 0.65rem;
+  font-family: inherit;
+  font-size: 0.85rem;
+  border-radius: 2px;
+}
+input:focus, select:focus { outline: 2px solid var(--teal); outline-offset: 1px; }
+.check-row { display: flex; align-items: center; gap: 0.5rem; }
+.check-row input { width: 1rem; height: 1rem; cursor: pointer; accent-color: var(--teal); }
+.check-row label { display: inline; margin: 0; text-transform: none; letter-spacing: 0; font-weight: 400; font-size: 0.9rem; color: var(--ink); }
+.privacy-note { font-size: 0.78rem; color: var(--gold-deep); margin-top: 1rem; }
+[data-theme="dark"] .privacy-note { color: var(--gold); }
+.error-msg {
+  color: var(--err);
+  font-size: 0.85rem;
+  margin-top: 0.85rem;
+  padding: 0.65rem;
+  background: var(--code-bg);
+  border-left: 3px solid var(--err);
+  border-radius: 2px;
+}
+.section {
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  padding: 1.25rem;
+  border-radius: 3px;
+}
+.section-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.85rem; gap: 0.75rem; }
+.section-title { font-size: 0.9rem; font-weight: 600; letter-spacing: 0.02em; }
+.copy-btn { font-size: 0.78rem; padding: 0.4rem 0.85rem; font-family: inherit; border: 1px solid var(--rule); background: var(--surface); color: var(--ink); cursor: pointer; border-radius: 2px; }
+.copy-btn:hover { border-color: var(--teal); }
+.output { font-size: 0.95rem; line-height: 1.7; color: var(--ink); white-space: pre-wrap; word-break: break-word; }
+.output p { margin-bottom: 1rem; }
+.output p:last-child { margin-bottom: 0; }
+.stats { font-size: 0.78rem; color: var(--ink-soft); margin-top: 1rem; font-family: ui-monospace, SFMono-Regular, monospace; }
+footer {
+  margin-top: 3rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--rule);
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+}
+footer a { color: var(--teal); text-decoration: none; }
+footer a:hover { text-decoration: underline; }
+@media (max-width: 640px) {
+  body { padding: 1rem 0.75rem; }
+  h1 { font-size: 1.4rem; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div>
+    <h1>Lorem Ipsum Generator</h1>
+    <div class="tag">Placeholder text in your browser</div>
+  </div>
+  <button class="theme-btn" id="theme-toggle" type="button">Dark</button>
+</header>
+
+<p class="lede">Generate lorem ipsum placeholder text by paragraphs, sentences, or words. It updates live as you change the options. Everything runs locally in your browser.</p>
+
+<div class="input-box">
+  <div class="controls">
+    <div>
+      <label for="count">Amount</label>
+      <input type="number" id="count" min="1" max="200" value="3">
+    </div>
+    <div>
+      <label for="unit">Unit</label>
+      <select id="unit">
+        <option value="paragraphs">Paragraphs</option>
+        <option value="sentences">Sentences</option>
+        <option value="words">Words</option>
+      </select>
+    </div>
+    <div class="check-row">
+      <input type="checkbox" id="start-lorem" checked>
+      <label for="start-lorem">Start with "Lorem ipsum..."</label>
+    </div>
+  </div>
+  <div class="privacy-note">Generated locally with your browser. Nothing is sent to any server.</div>
+  <div id="error-box"></div>
+</div>
+
+<div class="section">
+  <div class="section-head">
+    <div class="section-title">Output</div>
+    <button class="copy-btn" id="copy-btn" type="button">Copy text</button>
+  </div>
+  <div class="output" id="output"></div>
+  <div class="stats" id="stats"></div>
+</div>
+
+<footer>
+  <div>Lorem Ipsum Generator. Open source, MIT licensed. <a href="https://github.com/0xelitesystem/lorem-ipsum-generator" target="_blank" rel="noopener">View source</a>.</div>
+  <div>Classic placeholder text, no dependencies.</div>
+</footer>
+</div>
+
+<script>
+const $ = (id) => document.getElementById(id);
+
+const themeBtn = $("theme-toggle");
+function setTheme(t) {
+  document.documentElement.setAttribute("data-theme", t);
+  themeBtn.textContent = t === "dark" ? "Light" : "Dark";
+}
+themeBtn.addEventListener("click", () => {
+  const cur = document.documentElement.getAttribute("data-theme") || "light";
+  setTheme(cur === "dark" ? "light" : "dark");
+});
+(function initTheme() {
+  const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+  setTheme(prefersDark ? "dark" : "light");
+})();
+
+const WORDS = ["lorem","ipsum","dolor","sit","amet","consectetur","adipiscing","elit","sed","do","eiusmod","tempor","incididunt","ut","labore","et","dolore","magna","aliqua","enim","ad","minim","veniam","quis","nostrud","exercitation","ullamco","laboris","nisi","aliquip","ex","ea","commodo","consequat","duis","aute","irure","in","reprehenderit","voluptate","velit","esse","cillum","eu","fugiat","nulla","pariatur","excepteur","sint","occaecat","cupidatat","non","proident","sunt","culpa","qui","officia","deserunt","mollit","anim","id","est","laborum","perspiciatis","unde","omnis","iste","natus","error","voluptatem","accusantium","doloremque","laudantium","totam","rem","aperiam","eaque","ipsa","quae","ab","illo","inventore","veritatis","quasi","architecto","beatae","vitae","dicta","explicabo"];
+const LOREM_START = ["lorem","ipsum","dolor","sit","amet","consectetur","adipiscing","elit"];
+
+function rand(n) { return Math.floor(Math.random() * n); }
+function pick() { return WORDS[rand(WORDS.length)]; }
+
+function makeSentence(forceStart) {
+  const len = 6 + rand(11); // 6 to 16 words
+  const words = [];
+  for (let i = 0; i < len; i++) {
+    if (forceStart && i < LOREM_START.length) words.push(LOREM_START[i]);
+    else words.push(pick());
+  }
+  // occasional comma
+  if (words.length > 6 && rand(2) === 0) {
+    const at = 2 + rand(words.length - 4);
+    words[at] = words[at] + ",";
+  }
+  let s = words.join(" ");
+  s = s.charAt(0).toUpperCase() + s.slice(1);
+  return s + ".";
+}
+
+function makeParagraph(forceStart) {
+  const n = 3 + rand(4); // 3 to 6 sentences
+  const sentences = [];
+  for (let i = 0; i < n; i++) {
+    sentences.push(makeSentence(forceStart && i === 0));
+  }
+  return sentences.join(" ");
+}
+
+function generate() {
+  $("error-box").innerHTML = "";
+  const unit = $("unit").value;
+  let count = parseInt($("count").value, 10);
+  const startLorem = $("start-lorem").checked;
+
+  if (isNaN(count) || count < 1) {
+    showError("Amount must be a whole number of 1 or more.");
+    return;
+  }
+  if (count > 200) {
+    showError("Amount is capped at 200.");
+    return;
+  }
+
+  const out = $("output");
+  out.innerHTML = "";
+  let plainText = "";
+  let wordCount = 0;
+
+  if (unit === "paragraphs") {
+    const paras = [];
+    for (let i = 0; i < count; i++) {
+      const p = makeParagraph(startLorem && i === 0);
+      paras.push(p);
+      const el = document.createElement("p");
+      el.textContent = p;
+      out.appendChild(el);
+      wordCount += p.split(/\s+/).length;
+    }
+    plainText = paras.join("\n\n");
+  } else if (unit === "sentences") {
+    const sents = [];
+    for (let i = 0; i < count; i++) {
+      sents.push(makeSentence(startLorem && i === 0));
+    }
+    plainText = sents.join(" ");
+    const el = document.createElement("p");
+    el.textContent = plainText;
+    out.appendChild(el);
+    wordCount = plainText.split(/\s+/).length;
+  } else { // words
+    const words = [];
+    for (let i = 0; i < count; i++) {
+      if (startLorem && i < LOREM_START.length) words.push(LOREM_START[i]);
+      else words.push(pick());
+    }
+    let text = words.join(" ");
+    text = text.charAt(0).toUpperCase() + text.slice(1) + ".";
+    plainText = text;
+    const el = document.createElement("p");
+    el.textContent = text;
+    out.appendChild(el);
+    wordCount = count;
+  }
+
+  out.dataset.plain = plainText;
+  $("stats").textContent = wordCount + " words, " + plainText.length + " characters";
+}
+
+function showError(msg) {
+  $("error-box").innerHTML = '<div class="error-msg">' + msg.replace(/</g, "&lt;") + "</div>";
+  $("output").innerHTML = "";
+  $("stats").textContent = "";
+}
+
+["count", "unit", "start-lorem"].forEach((id) => {
+  $(id).addEventListener("input", generate);
+  $(id).addEventListener("change", generate);
+});
+
+$("copy-btn").addEventListener("click", async () => {
+  const text = $("output").dataset.plain || "";
+  if (!text) return;
+  const btn = $("copy-btn");
+  const original = btn.textContent;
+  try {
+    await navigator.clipboard.writeText(text);
+    btn.textContent = "Copied";
+  } catch (e) {
+    const ta = document.createElement("textarea");
+    ta.value = text;
+    document.body.appendChild(ta);
+    ta.select();
+    try { document.execCommand("copy"); btn.textContent = "Copied"; }
+    catch (e2) { btn.textContent = "Copy failed"; }
+    document.body.removeChild(ta);
+  }
+  setTimeout(() => { btn.textContent = original; }, 1500);
+});
+
+// Initial render
+generate();
+</script>
+</body>
+</html>
